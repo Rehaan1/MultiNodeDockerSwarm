@@ -24,8 +24,8 @@ services:
       - "80:80"
     depends_on:
       - addr
-    links:
-      - addr
+    networks:
+      - addr_network
     deploy:
       replicas: 5
       restart_policy:
