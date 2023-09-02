@@ -6,8 +6,17 @@ services:
     image: rehaanmazid009/addr-service
     environment:
       - PORT=5001
-    ports:
-      - "5001:5001"
+    networks:
+      addr_network:
+        aliases:
+          - addr
+    deploy:
+      replicas: 10
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role != manager]
+      
 
   nginx:
     image: rehaanmazid009/addr-nginx
@@ -17,3 +26,14 @@ services:
       - addr
     links:
       - addr
+    deploy:
+      replicas: 5
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role != manager]
+
+networks:
+
+  addr_network:
+    driver: overlay
