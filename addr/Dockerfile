@@ -16,4 +16,4 @@ COPY --chown=node:node . .
 
 USER node
 
-CMD ["node", "app.js"]
+CMD ["node", "index.js"]
