@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+
+  addr:
+    image: rehaanmazid/addr-service
+    environment:
+      - PORT=5001
+    ports:
+      - "5001:5001"
+
+  nginx:
+    image: rehaanmazid/nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - addr
+    links:
+      - addr
